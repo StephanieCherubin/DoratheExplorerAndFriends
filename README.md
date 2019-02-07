@@ -1,4 +1,4 @@
-#Oregon Trail
+# Oregon Trail
 
 This game is pure HTML, CSS and JavaScript. No external libraries.
 
