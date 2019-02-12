@@ -7,7 +7,7 @@ var OregonH = OregonH || {};
 OregonH.WEIGHT_PER_OX = 20;
 OregonH.WEIGHT_PER_PERSON = 2;
 OregonH.FOOD_WEIGHT = 0.6;
-OregonH.FIREPOWER_WEIGHT = 5;
+OregonH.ENERGY_WEIGHT = 5;
 OregonH.GAME_SPEED = 800;
 OregonH.DAY_PER_STEP = 0.2;
 OregonH.FOOD_PER_PERSON = 0.02;
@@ -15,7 +15,7 @@ OregonH.FULL_SPEED = 5;
 OregonH.SLOW_SPEED = 3;
 OregonH.FINAL_DISTANCE = 1000;
 OregonH.EVENT_PROBABILITY = 0.15;
-OregonH.ENEMY_FIREPOWER_AVG = 5;
+OregonH.ENEMY_ENERGY_AVG = 5;
 OregonH.ENEMY_GOLD_AVG = 50;
 
 OregonH.Game = {};
@@ -24,11 +24,11 @@ OregonH.Caravan = {};
 OregonH.Caravan.init = function init(stats) {
   this.day = stats.day;
   this.distance = stats.distance;
-  this.crew = stats.crew;
+  this.friends = stats.friends;
   this.food = stats.food;
   this.oxen = stats.oxen;
   this.money = stats.money;
-  this.firepower = stats.firepower;
+  this.energy = stats.energy;
 };
 
 // initiate the game
@@ -38,11 +38,11 @@ OregonH.Game.init = function init() {
   this.caravan.init({
     day: 0,
     distance: 0,
-    crew: 30,
+    friends: 30,
     food: 80,
     oxen: 2,
     money: 300,
-    firepower: 2,
+    energy: 2,
   });
 };
 
@@ -55,16 +55,16 @@ OregonH.Caravan.updateWeight = function updateWeight() {
   let droppedGuns = 0;
 
   // how much can the caravan carry
-  this.capacity = this.oxen * OregonH.WEIGHT_PER_OX + this.crew * OregonH.WEIGHT_PER_PERSON;
+  this.capacity = this.oxen * OregonH.WEIGHT_PER_OX + this.friends * OregonH.WEIGHT_PER_PERSON;
 
   // how much weight do we currently have
-  this.weight = this.food * OregonH.FOOD_WEIGHT + this.firepower * OregonH.FIREPOWER_WEIGHT;
+  this.weight = this.food * OregonH.FOOD_WEIGHT + this.energy * OregonH.ENERGY_WEIGHT;
 
   // drop things behind if it's too much weight
   // assume guns get dropped before food
-  while (this.firepower && this.capacity <= this.weight) {
-    this.firepower -= 1;
-    this.weight -= OregonH.FIREPOWER_WEIGHT;
+  while (this.energy && this.capacity <= this.weight) {
+    this.energy -= 1;
+    this.weight -= OregonH.ENERGY_WEIGHT;
     droppedGuns += 1;
   }
 
@@ -93,7 +93,7 @@ OregonH.Caravan.updateDistance = function updateDistance() {
 
 // food consumption
 OregonH.Caravan.consumeFood = function consumeFood() {
-  this.food -= this.crew * OregonH.FOOD_PER_PERSON;
+  this.food -= this.friends * OregonH.FOOD_PER_PERSON;
 
   if (this.food < 0) {
     this.food = 0;

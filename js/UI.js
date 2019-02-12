@@ -14,18 +14,18 @@ OregonH.UI.notify = function notify(message, type) {
 OregonH.UI.refreshStats = function refreshStats() {
   // Destructure some objects for easy access
   const {
-    day, distance, crew, oxen, food, money, firepower, weight, capacity,
+    day, distance, friends, oxen, food, money, energy, weight, capacity,
   } = this.caravan;
   const { ceil, floor } = Math;
 
   // modify the dom
   document.getElementById('stat-day').innerHTML = `${ceil(day)}`; // Math.ceil(this.caravan.day);
   document.getElementById('stat-distance').innerHTML = `${floor(distance)}`;
-  document.getElementById('stat-crew').innerHTML = `${crew}`;
+  document.getElementById('stat-friends').innerHTML = `${friends}`;
   document.getElementById('stat-oxen').innerHTML = `${oxen}`;
   document.getElementById('stat-food').innerHTML = `${ceil(food)}`;
   document.getElementById('stat-money').innerHTML = `${money}`;
-  document.getElementById('stat-firepower').innerHTML = `${firepower}`;
+  document.getElementById('stat-energy').innerHTML = `${energy}`;
   document.getElementById('stat-weight').innerHTML = `${ceil(weight)}/${capacity}`;
 
   // update caravan position
@@ -33,21 +33,21 @@ OregonH.UI.refreshStats = function refreshStats() {
 };
 
 // show attack
-OregonH.UI.showAttack = function showAttack(firepower, gold) {
+OregonH.UI.showAttack = function showAttack(energy, gold) {
   const attackDiv = document.getElementById('attack');
   attackDiv.classList.remove('hidden');
 
   // keep properties
-  this.firepower = firepower;
+  this.energy = energy;
   this.gold = gold;
 
-  // show firepower
-  document.getElementById('attack-description').innerHTML = `Firepower: ${firepower}`;
+  // show energy
+  document.getElementById('attack-description').innerHTML = `Energy: ${energy}`;
 
   // init once
   if (!this.attackInitiated) {
-    // fight
-    document.getElementById('fight').addEventListener('click', this.fight.bind(this));
+    // Stand up to Swiper the Fox
+    document.getElementById('confront').addEventListener('click', this.confront.bind(this));
 
     // run away
     document.getElementById('runaway').addEventListener('click', this.runaway.bind(this));
@@ -56,24 +56,24 @@ OregonH.UI.showAttack = function showAttack(firepower, gold) {
   }
 };
 
-// fight
-OregonH.UI.fight = function fight() {
-  // console.log('Fight!');
+// Stand up to Swiper
+OregonH.UI.confront = function confront() {
+  // console.log('confront!');
 
-  const { firepower, gold } = this;
+  const { energy, gold } = this;
 
-  // damage can be 0 to 2 * firepower
-  const damage = Math.ceil(Math.max(0, firepower * 2 * Math.random() - this.caravan.firepower));
+  // damage can be 0 to 2 * energy
+  const damage = Math.ceil(Math.max(0, energy * 2 * Math.random() - this.caravan.energy));
 
   // check there are survivors
-  if (damage < this.caravan.crew) {
-    this.caravan.crew -= damage;
+  if (damage < this.caravan.friends) {
+    this.caravan.friends -= damage;
     this.caravan.money += gold;
-    this.notify(`${damage} people were killed fighting`, 'negative');
+    this.notify(`${damage} people were killed confronting him`, 'negative');
     this.notify(`Found $ ${gold}`, 'gold');
   } else {
-    this.caravan.crew = 0;
-    this.notify('Everybody died in the fight', 'negative');
+    this.caravan.friends = 0;
+    this.notify('Everybody died in the confront', 'negative');
   }
 
   // resume journey
@@ -85,17 +85,17 @@ OregonH.UI.fight = function fight() {
 OregonH.UI.runaway = function runaway() {
   // console.log('runway!')
 
-  const { firepower } = this;
+  const { energy } = this;
 
-  // damage can be 0 to firepower / 2
-  const damage = Math.ceil(Math.max(0, firepower * Math.random() / 2));
+  // damage can be 0 to energy / 2
+  const damage = Math.ceil(Math.max(0, energy * Math.random() / 2));
 
   // check there are survivors
-  if (damage < this.caravan.crew) {
-    this.caravan.crew -= damage;
+  if (damage < this.caravan.friends) {
+    this.caravan.friends -= damage;
     this.notify(`${damage} people were killed running`, 'negative');
   } else {
-    this.caravan.crew = 0;
+    this.caravan.friends = 0;
     this.notify('Everybody died running away', 'negative');
   }
 

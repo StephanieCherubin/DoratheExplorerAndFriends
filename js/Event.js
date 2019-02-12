@@ -9,14 +9,14 @@ OregonH.Event.eventTypes = [
   {
     type: 'STAT-CHANGE',
     notification: 'negative',
-    stat: 'crew',
+    stat: 'friends',
     value: -3,
     text: 'Food intoxication. Casualties: ',
   },
   {
     type: 'STAT-CHANGE',
     notification: 'negative',
-    stat: 'crew',
+    stat: 'friends',
     value: -4,
     text: 'Flu outbreak. Casualties: ',
   },
@@ -69,8 +69,8 @@ OregonH.Event.eventTypes = [
     products: [
       { item: 'food', qty: 20, price: 50 },
       { item: 'oxen', qty: 1, price: 200 },
-      { item: 'firepower', qty: 2, price: 50 },
-      { item: 'crew', qty: 5, price: 80 },
+      { item: 'energy', qty: 2, price: 50 },
+      { item: 'friends', qty: 5, price: 80 },
     ],
   },
   {
@@ -80,8 +80,8 @@ OregonH.Event.eventTypes = [
     products: [
       { item: 'food', qty: 30, price: 50 },
       { item: 'oxen', qty: 1, price: 200 },
-      { item: 'firepower', qty: 2, price: 20 },
-      { item: 'crew', qty: 10, price: 80 },
+      { item: 'energy', qty: 2, price: 20 },
+      { item: 'friends', qty: 10, price: 80 },
     ],
   },
   {
@@ -91,30 +91,39 @@ OregonH.Event.eventTypes = [
     products: [
       { item: 'food', qty: 20, price: 60 },
       { item: 'oxen', qty: 1, price: 300 },
-      { item: 'firepower', qty: 2, price: 80 },
-      { item: 'crew', qty: 5, price: 60 },
+      { item: 'energy', qty: 2, price: 80 },
+      { item: 'friends', qty: 5, price: 60 },
     ],
   },
   {
-    type: 'ATTACK',
+    type: 'STAT-CHANGE',
     notification: 'negative',
-    text: 'Bandits are attacking you',
+    text: 'Swiper is attacking you',
   },
   {
     type: 'ATTACK',
     notification: 'negative',
-    text: 'Bandits are attacking you',
+    text: 'Swiper is attacking you',
+    stat: 'energy',
+    value: -1,
   },
   {
     type: 'ATTACK',
     notification: 'negative',
-    text: 'Bandits are attacking you',
+    text: 'Swiper the Fox is attacking you`',
+    stat: 'energy',
+    value: -1,
   },
 ];
 
+function randomInts(n) {
+  const { floor, random } = Math;
+  return floor (random() * n)
+}
+
 OregonH.Event.generateEvent = function generateEvent() {
   // pick random one
-  const eventIndex = Math.floor(Math.random() * this.eventTypes.length);
+  const eventIndex = randomInts(this.eventTypes.length);
   const eventData = this.eventTypes[eventIndex];
 
   // events that consist in updating a stat
@@ -151,9 +160,14 @@ OregonH.Event.stateChangeEvent = function stateChangeEvent(eventData) {
   }
 };
 
+function randomCeil(n) {
+  const { ceil, random } = Math;
+  return ceil(random() * n)
+}
+
 OregonH.Event.shopEvent = function shopEvent(eventData) {
   // number of products for sale
-  const numProds = Math.ceil(Math.random() * 4);
+  const numProds = randomCeil(4);
 
   // product list
   const products = [];
@@ -179,8 +193,8 @@ OregonH.Event.shopEvent = function shopEvent(eventData) {
 
 // prepare an attack event
 OregonH.Event.attackEvent = function attackEvent() {
-  const firepower = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_FIREPOWER_AVG);
+  const energy = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_ENERGY_AVG);
   const gold = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_GOLD_AVG);
 
-  this.ui.showAttack(firepower, gold);
+  this.ui.showAttack(energy, gold);
 };
