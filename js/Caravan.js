@@ -18,9 +18,57 @@ OregonH.EVENT_PROBABILITY = 0.15;
 OregonH.ENEMY_ENERGY_AVG = 5;
 OregonH.ENEMY_GOLD_AVG = 50;
 
-OregonH.Game = {};
-OregonH.Caravan = {};
+//---------------------------------------------
+OregonH.Game = {}; 
+//new Game
 
+class Game {
+
+}
+//-----------------Caravan Class----------------
+OregonH.Caravan = {}; //new Caravan
+
+
+
+
+class Caravan {
+  constructor() {
+    this.stats = {
+      day: 0,
+      distance: 0,
+      friends: 30,
+      food: 80,
+      oxen: 2,
+      money: 300,
+      energy: 2,
+    }
+
+    this.init(this.stats)
+  }
+
+  init(day, distance, friends, food, oxen, money, energy){
+  this.day = day;
+  this.distance = distance;
+  this.friends = friends;
+  this.food = food;
+  this.oxen = oxen;
+  this.money = money;
+  this.energy = energy;
+  }
+
+  updateWeight () {
+
+  }
+
+  updateDistance() {
+
+  }
+
+  consumeFood() {
+    
+  }
+}
+//---------------------------------------------
 OregonH.Caravan.init = function init(stats) {
   this.day = stats.day;
   this.distance = stats.distance;

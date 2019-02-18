@@ -6,6 +6,7 @@ var OregonH = OregonH || {};
 OregonH.Event = {};
 
 OregonH.Event.eventTypes = [
+  // Make a class for every type of event type below
   {
     type: 'STAT-CHANGE',
     notification: 'negative',
