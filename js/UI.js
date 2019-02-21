@@ -62,6 +62,10 @@ OregonH.UI.confront = function confront() {
 
   const { energy, gold } = this;
 
+  if (energy > OregonH.Caravan.energy) {
+    OregonH.UI.notify('Not enough energy to fight', 'negative');
+    return false;
+  }
   // damage can be 0 to 2 * energy
   const damage = Math.ceil(Math.max(0, energy * 2 * Math.random() - this.caravan.energy));
 
