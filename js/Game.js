@@ -36,9 +36,9 @@ class Game {
       distance: 0,
       friends: 30,
       food: 80,
-      oxen: 2,
+      oxen: 5,
       money: 300,
-      energy: 2,
+      energy: 12,
     });
   
     // pass references
