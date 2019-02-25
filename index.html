@@ -10,22 +10,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Dora the Explorer</title>
     <link rel="stylesheet" href="css/style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script" rel="stylesheet">
   </head>
   <body>
-    <h1>Dora the Explorer & Friends</h1>
-    <h3>Go on a Berry Hunt</H3>
+    <header>
+      <!-- <h1>Dora the Explorer & Friends</h1>
+      <h3>Into The City</h3> -->
+      <img src="images/DoraandFriends.jpg" class='banner' alt="Dora and her Friends running">
+    </header>
     <div id="home"></div>
-    <div id="journey">
+    <div id="journey"> 
      
       <div id="stats-area">
         <div class="stat">Day <span id="stat-day" class="stat-value"></span></div>
         <div class="stat">Distance <span id="stat-distance" class="stat-value"></span></div>
-        <div class="stat">Crew <span id="stat-friends" class="stat-value"></span></div>
-        <div class="stat">Oxen <span id="stat-oxen" class="stat-value"></span></div>
+        <div class="stat">Friends <span id="stat-friends" class="stat-value"></span></div>
+        <div class="stat">Backpack Contents <span id="stat-supplies" class="stat-value"></span></div>
         <div class="stat">Food <span id="stat-food" class="stat-value"></span></div>
-        <div class="stat">Money <span id="stat-money" class="stat-value"></span></div>
+        <div class="stat">Coins <span id="stat-money" class="stat-value"></span></div>
         <div class="stat">Energy <span id="stat-energy" class="stat-value"></span></div>
-        <div class="stat">Weight <span id="stat-weight" class="stat-value"></span><span id="stat-capacity" class="stat-value"></span></div>
+        <div class="stat">Burden <span id="stat-weight" class="stat-value"></span><span id="stat-capacity" class="stat-value"></span></div>
       </div>
       
       <div class="updates-area" id="updates-area"></div>
@@ -38,31 +42,18 @@
       
       <div id="attack" class="hidden">
         <div id="attack-description"></div>
-        <button id="confront">Stand Up To Swiper</button>
+        <button id="confront">Stand up to him</button>
         <button id="runaway">Run away</button>
       </div>
       
       <div id="progress-area">
         <img id="caravan" src="images/Wagon.png" />
-        <img id="trees" src="images/Trees.png" />
+        <!-- <img id="trees" src="images/Trees.png" /> -->
+        <img id="forest" src="images/cartoon-forest.gif" />
       </div>
     </div>
  
     <div id="event"></div>
-    
-    <!-- 
-Challenges 
-
-1) Get the tutorial working 
-2) Play the game
-3) Check for errors.
-  - Check for any errors you might find
-  - Play test and make sure all of the features in the game are working. 
-4) Update the code to more modern and easier to understand syntax
-  - Replace var with let, and const
-  - Object deconstruction
-5) OOP - Define class Objects for Caravan, Event, Game, and UI
-    -->
     
     <script src="js/Event.js"></script>
     <script src="js/Caravan.js"></script>

@@ -25,22 +25,22 @@ class Caravan {
     this.stats = {
       day: 0,
       distance: 0,
-      friends: 30,
+      friends: 15,
       food: 80,
-      oxen: 2,
-      money: 300,
-      energy: 2,
+      supplies: 2,
+      money: 275,
+      energy: 12,
     }
     
     this.init(this.stats)
   }
   
-  init({day, distance, friends, food, oxen, money, energy}){
+  init({day, distance, friends, food, supplies, money, energy}){
     this.day = day;
     this.distance = distance;
     this.friends = friends;
     this.food = food;
-    this.oxen = oxen;
+    this.supplies = supplies;
     this.money = money;
     this.energy = energy;
   }
@@ -51,7 +51,7 @@ class Caravan {
     let droppedGuns = 0;
     
     // how much can the caravan carry
-    this.capacity = this.oxen * OregonH.WEIGHT_PER_OX + this.friends * OregonH.WEIGHT_PER_PERSON;
+    this.capacity = this.supplies * OregonH.WEIGHT_PER_OX + this.friends * OregonH.WEIGHT_PER_PERSON;
 
     // how much weight do we currently have
     this.weight = this.food * OregonH.FOOD_WEIGHT + this.energy * OregonH.ENERGY_WEIGHT;
@@ -65,7 +65,7 @@ class Caravan {
     }
 
     if (droppedGuns) {
-      this.ui.notify(`Left ${droppedGuns} guns behind`, 'negative');
+      this.ui.notify(`Left ${droppedGuns} supplies behind`, 'negative');
     }
 
     while (this.food && this.capacity <= this.weight) {

@@ -34,11 +34,11 @@ class Game {
     this.caravan.init({
       day: 0,
       distance: 0,
-      friends: 30,
+      friends: 6,
       food: 80,
-      oxen: 5,
+      supplies: 5,
       money: 300,
-      energy: 12,
+      energy: 25,
     });
   
     // pass references
@@ -62,7 +62,7 @@ class Game {
   startJourney() {
     this.gameActive = true;
     this.previousTime = null;
-    this.ui.notify('A great adventure begins', 'positive');
+    this.ui.notify("Come on! !Vamanos! \n Let's Embark On a Great Journey!", 'positive');
   
     this.step();
   };
@@ -111,17 +111,17 @@ class Game {
     // show stats
     this.ui.refreshStats();
   
-    // check if everyone died
+    // check anyone is still traveling
     if (this.caravan.friends <= 0) {
       this.caravan.friends = 0;
-      this.ui.notify('Everyone died', 'negative');
+      this.ui.notify('Everyone else left. GAME OVER', 'negative');
       this.gameActive = false;
       return;
     }
   
     // check win game
     if (this.caravan.distance >= OregonH.FINAL_DISTANCE) {
-      this.ui.notify('You have returned home!', 'positive');
+      this.ui.notify('You and your friends reached Blueberry Hill!', 'positive');
       this.gameActive = false;
       return;
     }

@@ -11,7 +11,7 @@ class UI {
   refreshStats() {
     // Destructure some objects for easy access
     const {
-      day, distance, friends, oxen, food, money, energy, weight, capacity,
+      day, distance, friends, supplies, food, money, energy, weight, capacity,
     } = this.caravan;
     const { ceil, floor } = Math;
 
@@ -19,7 +19,7 @@ class UI {
     document.getElementById('stat-day').innerHTML = `${ceil(day)}`; // Math.ceil(this.caravan.day);
     document.getElementById('stat-distance').innerHTML = `${floor(distance)}`;
     document.getElementById('stat-friends').innerHTML = `${friends}`;
-    document.getElementById('stat-oxen').innerHTML = `${oxen}`;
+    document.getElementById('stat-supplies').innerHTML = `${supplies}`;
     document.getElementById('stat-food').innerHTML = `${ceil(food)}`;
     document.getElementById('stat-money').innerHTML = `${money}`;
     document.getElementById('stat-energy').innerHTML = `${energy}`;
@@ -58,7 +58,7 @@ class UI {
     const { energy, gold } = this;
 
     if (energy > OregonH.Caravan.energy) {
-      OregonH.UI.notify('Not enough energy to fight', 'negative');
+      OregonH.UI.notify('Not enough energy to confront', 'negative');
       return false;
     }
   
@@ -69,11 +69,11 @@ class UI {
     if (damage < this.caravan.friends) {
       this.caravan.friends -= damage;
       this.caravan.money += gold;
-      this.notify(`${damage} people were killed confronting him`, 'negative');
-      this.notify(`Found $ ${gold}`, 'gold');
+      this.notify(`${damage} friends ran away from him`, 'negative');
+      this.notify(`Found $ ${gold}`, 'gold', 'positive');
     } else {
       this.caravan.friends = 0;
-      this.notify('Everybody died in the confront', 'negative');
+      this.notify('Everybody left in the confrontation', 'negative');
     }
   
     // resume journey
@@ -91,10 +91,10 @@ class UI {
     // check there are survivors
     if (damage < this.caravan.friends) {
       this.caravan.friends -= damage;
-      this.notify(`${damage} people were killed running`, 'negative');
+      this.notify(`${damage} friends ran away`, 'negative');
     } else {
       this.caravan.friends = 0;
-      this.notify('Everybody died running away', 'negative');
+      this.notify('Everybody decided not to finish the journey', 'negative');
     }
   
     // remove event listener
@@ -150,7 +150,7 @@ class UI {
   buyProduct(product) {
     // check we can afford it
     if (product.price > OregonH.UI.caravan.money) {
-      OregonH.UI.notify('Not enough money', 'negative');
+      OregonH.UI.notify('Not enough coins', 'negative');
       return false;
     }
 
@@ -158,7 +158,7 @@ class UI {
 
     OregonH.UI.caravan[product.item] += +product.qty;
 
-    OregonH.UI.notify(`Bought ${product.qty} x ${product.item}`, 'positive');
+    OregonH.UI.notify(`Bought ${product.qty} ${product.item}`, 'positive');
 
     // update weight
     OregonH.UI.caravan.updateWeight();

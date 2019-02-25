@@ -1,17 +1,24 @@
 html {
   height: 100%;
 }
- 
+
 body {
   padding: 0;
   margin: 0;
   border: 0;
   height: 100%;
   overflow: hidden;
-  font-family: Helvetica;
-  font-size: 18px;
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 20px;
 }
- 
+.banner {
+  width: 100%; 
+}
+
+h1, h3 {
+ text-align: center;
+}
+
 .hidden {
   display: none;
 }
@@ -22,7 +29,7 @@ body {
  
 #journey {
   height: 100%;
-  background-color: rgb(80, 140, 230);
+  background-color: rgb(100, 104, 186);
 }
  
 #event {
@@ -33,10 +40,11 @@ body {
   float: left;
   position: relative;
   width: 400px;
-  margin: 10px;
+  margin: 8px;
+  border: 10px solid black;
 }
  
-#trees {
+#forest {
   width: 100%;
   image-rendering: pixelated;
 }
@@ -48,51 +56,49 @@ body {
 }
  
 #stats-area {
-  background-color: white;
   float: left;
-  height: 150px;
-  width: 156px;
+  height: 220px;
+  width: 190px;
   margin: 10px;
   padding: 10px;
-  font-size: 14px;
+  font-size: 24px;
 }
- 
- 
  
 .stat-value {
   float: right;
 }
  
 #updates-area {
-  background-color: white;
   float: left;
-  width: 350px;
+  width: 360px;
   margin: 10px;
-  height: 150px;
+  height: 220px;
   padding: 10px;
-  font-size: 12px;
+  font-size: 24px;
   overflow-y: scroll;
 }
  
 .update-positive {
-  color: #669966;
+  background-color: #669966;
+  color: black;
 }
  
 .update-negative {
-  color: red;
+  color: black;
+  background-color: red;
 }
  
 .update-neutral {
-  color: #90908F;
+  background-color: #90908F;
+  color: white;
 }
  
 #shop {
   float: left;
-  background-color: white;
   margin: 10px;
   padding: 10px;
-  height: 90px;
-  width: 350px;
+  height: 220px;
+  width: 140px;
 }
  
 .product {
@@ -100,20 +106,31 @@ body {
   margin: 5px;
   padding: 2px;
   border: 1px solid black;
-  font-size: 12px;
+  font-size: 24px;
+  background: rgb(251, 218, 113);
 }
  
 #shop button {
   clear: both;
   float: left;
   margin: 5px;
+  font-size: 16px;
 }
  
 #attack {
   float: left;
-  background-color: white;
   margin: 10px;
   padding: 10px;
-  height: 60px;
+  height: 220px;
   width: 150px;
+  font-size: 20px;
+}
+
+#attack-description {
+  font-size: 26px;
+  color: white;
+}
+
+#confront, #runaway {
+  font-size: 16px;
 }
