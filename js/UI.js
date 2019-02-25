@@ -4,19 +4,19 @@ var OregonH = OregonH || {};
 class UI {
   // show a notification in the message area
   notify(message, type) {
-    document.getElementById('updates-area').innerHTML = `<div class="update-${type}">Day ${Math.ceil(this.caravan.day)}: ${message}</div> ${document.getElementById('updates-area').innerHTML}`;
+    document.getElementById('updates-area').innerHTML = `<div class="update-${type}">Hour ${Math.ceil(this.caravan.hour)}: ${message}</div> ${document.getElementById('updates-area').innerHTML}`;
   }
 
 // refresh visual caravan stats
   refreshStats() {
     // Destructure some objects for easy access
     const {
-      day, distance, friends, supplies, food, money, energy, weight, capacity,
+      hour, distance, friends, supplies, food, money, energy, weight, capacity,
     } = this.caravan;
     const { ceil, floor } = Math;
 
     // modify the dom
-    document.getElementById('stat-day').innerHTML = `${ceil(day)}`; // Math.ceil(this.caravan.day);
+    document.getElementById('stat-hour').innerHTML = `${ceil(hour)}`; // Math.ceil(this.caravan.hour);
     document.getElementById('stat-distance').innerHTML = `${floor(distance)}`;
     document.getElementById('stat-friends').innerHTML = `${friends}`;
     document.getElementById('stat-supplies').innerHTML = `${supplies}`;
@@ -43,7 +43,7 @@ class UI {
   
     // init once
     if (!this.attackInitiated) {
-      // Stand up to Swiper the Fox
+      // Stand up to villains
       document.getElementById('confront').addEventListener('click', this.confront.bind(this));
   
       // run away
@@ -53,7 +53,7 @@ class UI {
     }
   }
 
-  // Stand up to Swiper
+  // Stand up to villains
   confront() {
     const { energy, gold } = this;
 
@@ -65,7 +65,7 @@ class UI {
     // damage can be 0 to 2 * energy
     const damage = Math.ceil(Math.max(0, energy * 2 * Math.random() - this.caravan.energy));
   
-    // check there are survivors
+    // check if Dora still has crew
     if (damage < this.caravan.friends) {
       this.caravan.friends -= damage;
       this.caravan.money += gold;
@@ -88,7 +88,7 @@ class UI {
     // damage can be 0 to energy / 2
     const damage = Math.ceil(Math.max(0, energy * Math.random() / 2));
   
-    // check there are survivors
+    // check if Dora still has crew
     if (damage < this.caravan.friends) {
       this.caravan.friends -= damage;
       this.notify(`${damage} friends ran away`, 'negative');
@@ -158,7 +158,7 @@ class UI {
 
     OregonH.UI.caravan[product.item] += +product.qty;
 
-    OregonH.UI.notify(`Bought ${product.qty} ${product.item}`, 'positive');
+    OregonH.UI.notify(`Picked up ${product.qty} ${product.item}`, 'positive');
 
     // update weight
     OregonH.UI.caravan.updateWeight();

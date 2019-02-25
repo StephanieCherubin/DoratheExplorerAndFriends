@@ -7,7 +7,7 @@ OregonH.WEIGHT_PER_PERSON = 2;
 OregonH.FOOD_WEIGHT = 0.6;
 OregonH.ENERGY_WEIGHT = 5;
 OregonH.GAME_SPEED = 800;
-OregonH.DAY_PER_STEP = 0.2;
+OregonH.HOUR_PER_STEP = 0.2;
 OregonH.FOOD_PER_PERSON = 0.02;
 OregonH.FULL_SPEED = 5;
 OregonH.SLOW_SPEED = 3;
@@ -32,7 +32,7 @@ class Game {
     // setup caravan
     this.caravan = OregonH.Caravan;
     this.caravan.init({
-      day: 0,
+      hour: 0,
       distance: 0,
       friends: 6,
       food: 80,
@@ -62,7 +62,7 @@ class Game {
   startJourney() {
     this.gameActive = true;
     this.previousTime = null;
-    this.ui.notify("Come on! !Vamanos! \n Let's Embark On a Great Journey!", 'positive');
+    this.ui.notify("Come on! !Vamanos! <br> Let's Embark On a Great Journey!", 'positive');
   
     this.step();
   };
@@ -89,15 +89,15 @@ class Game {
   };
 
   updateGame() {
-    // day update
-    this.caravan.day += OregonH.DAY_PER_STEP;
+    // hour update
+    this.caravan.hour += OregonH.HOUR_PER_STEP;
   
     // food consumption
     this.caravan.consumeFood();
   
     // game over no food
     if (this.caravan.food === 0) {
-      this.ui.notify('Your caravan starved to death', 'negative');
+      this.ui.notify('Your caravan has no more food', 'negative');
       this.gameActive = false;
       return;
     }
@@ -114,14 +114,14 @@ class Game {
     // check anyone is still traveling
     if (this.caravan.friends <= 0) {
       this.caravan.friends = 0;
-      this.ui.notify('Everyone else left. GAME OVER', 'negative');
+      this.ui.notify('All your friends left. <br> GAME OVER', 'negative');
       this.gameActive = false;
       return;
     }
   
     // check win game
     if (this.caravan.distance >= OregonH.FINAL_DISTANCE) {
-      this.ui.notify('You and your friends reached Blueberry Hill!', 'positive');
+      this.ui.notify('YOU AND YOUR FRIENDS REACHED BLUEBERRY HILL!<br> WE DID IT! <br> LO HICIMOS ', 'positive');
       this.gameActive = false;
       return;
     }

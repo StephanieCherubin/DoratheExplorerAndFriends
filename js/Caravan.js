@@ -9,7 +9,7 @@ OregonH.WEIGHT_PER_PERSON = 2;
 OregonH.FOOD_WEIGHT = 0.6;
 OregonH.ENERGY_WEIGHT = 5;
 OregonH.GAME_SPEED = 800;
-OregonH.DAY_PER_STEP = 0.2;
+OregonH.HOUR_PER_STEP = 0.2;
 OregonH.FOOD_PER_PERSON = 0.02;
 OregonH.FULL_SPEED = 5;
 OregonH.SLOW_SPEED = 3;
@@ -23,7 +23,7 @@ OregonH.ENEMY_GOLD_AVG = 50;
 class Caravan {
   constructor() {
     this.stats = {
-      day: 0,
+      hour: 0,
       distance: 0,
       friends: 15,
       food: 80,
@@ -35,8 +35,8 @@ class Caravan {
     this.init(this.stats)
   }
   
-  init({day, distance, friends, food, supplies, money, energy}){
-    this.day = day;
+  init({hour, distance, friends, food, supplies, money, energy}){
+    this.hour = hour;
     this.distance = distance;
     this.friends = friends;
     this.food = food;

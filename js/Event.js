@@ -147,7 +147,7 @@ OregonH.Event.eventTypes = [
     notification: 'positive',
     stat: 'supplies',
     value: 1,
-    text: 'Diego found a shortcut and gained supplies: ',
+    text: 'Diego found supplies: ',
   },
   {
     type: 'SHOP',
@@ -155,7 +155,7 @@ OregonH.Event.eventTypes = [
     text: 'Boots has found a store',
     products: [
       { item: 'food', qty: 25, price: 55 },
-      { item: 'supplies', qty: 1, price: 200 },
+      { item: 'supplies', qty: 1, price: 100 },
       { item: 'energy', qty: 2, price: 50 },
       { item: 'friends', qty: 5, price: 70 },
     ],
@@ -166,7 +166,7 @@ OregonH.Event.eventTypes = [
     text: 'Benny the Bull has found a shop',
     products: [
       { item: 'food', qty: 25, price: 55 },
-      { item: 'supplies', qty: 1, price: 200 },
+      { item: 'supplies', qty: 1, price: 100 },
       { item: 'energy', qty: 2, price: 20 },
       { item: 'friends', qty: 10, price: 70 },
     ],
@@ -177,15 +177,15 @@ OregonH.Event.eventTypes = [
     text: 'Shopkeepers sell various goods',
     products: [
       { item: 'food', qty: 25, price: 55 },
-      { item: 'supplies', qty: 1, price: 300 },
+      { item: 'supplies', qty: 1, price: 100 },
       { item: 'energy', qty: 2, price: 80 },
       { item: 'friends', qty: 5, price: 70 },
     ],
   },
   {
-    type: 'STAT-CHANGE',
+    type: 'ATTACK',
     notification: 'negative',
-    text: 'Grumpy Old Troll is making fun of you',
+    text: 'Grumpy Old Troll is making fun of you!',
     stat: 'energy',
     value: -1,
   },

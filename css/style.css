@@ -41,7 +41,7 @@ h1, h3 {
   position: relative;
   width: 400px;
   margin: 8px;
-  border: 10px solid black;
+  border: 12px solid black;
 }
  
 #forest {
@@ -53,6 +53,7 @@ h1, h3 {
   position: absolute;
   bottom: 30px;
   left: 0;
+  height: 75px;
 }
  
 #stats-area {
@@ -70,7 +71,7 @@ h1, h3 {
  
 #updates-area {
   float: left;
-  width: 360px;
+  width: 400px;
   margin: 10px;
   height: 220px;
   padding: 10px;
@@ -133,4 +134,9 @@ h1, h3 {
 
 #confront, #runaway {
   font-size: 16px;
+}
+
+.youtube-audio {
+  width: 20px;
+  height: 20px;
 }
