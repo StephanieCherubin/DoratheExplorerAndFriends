@@ -29,9 +29,9 @@ class Game {
     // reference event manager
     this.eventManager = OregonH.Event;
   
-    // setup caravan
-    this.caravan = OregonH.Caravan;
-    this.caravan.init({
+    // setup redwagon
+    this.redwagon = OregonH.redwagon;
+    this.redwagon.init({
       hour: 0,
       distance: 0,
       friends: 6,
@@ -42,16 +42,16 @@ class Game {
     });
   
     // pass references
-    this.caravan.ui = this.ui;
-    this.caravan.eventManager = this.eventManager;
+    this.redwagon.ui = this.ui;
+    this.redwagon.eventManager = this.eventManager;
   
     this.ui.game = this;
   
-    this.ui.caravan = this.caravan;
+    this.ui.redwagon = this.redwagon;
     this.ui.eventManager = this.eventManager;
   
     this.eventManager.game = this;
-    this.eventManager.caravan = this.caravan;
+    this.eventManager.redwagon = this.redwagon;
     this.eventManager.ui = this.ui;
   
     // begin adventure!
@@ -90,37 +90,37 @@ class Game {
 
   updateGame() {
     // hour update
-    this.caravan.hour += OregonH.HOUR_PER_STEP;
+    this.redwagon.hour += OregonH.HOUR_PER_STEP;
   
     // food consumption
-    this.caravan.consumeFood();
+    this.redwagon.consumeFood();
   
     // game over no food
-    if (this.caravan.food === 0) {
-      this.ui.notify('Your caravan has no more food', 'negative');
+    if (this.redwagon.food === 0) {
+      this.ui.notify('Your redwagon has no more food', 'negative');
       this.gameActive = false;
       return;
     }
   
     // update weight
-    this.caravan.updateWeight();
+    this.redwagon.updateWeight();
   
     // update progress
-    this.caravan.updateDistance();
+    this.redwagon.updateDistance();
   
     // show stats
     this.ui.refreshStats();
   
     // check anyone is still traveling
-    if (this.caravan.friends <= 0) {
-      this.caravan.friends = 0;
-      this.ui.notify('All your friends left. <br> GAME OVER', 'negative');
+    if (this.redwagon.friends <= 0) {
+      this.redwagon.friends = 0;
+      this.ui.notify('No more friends left. <br> GAME OVER', 'negative');
       this.gameActive = false;
       return;
     }
   
     // check win game
-    if (this.caravan.distance >= OregonH.FINAL_DISTANCE) {
+    if (this.redwagon.distance >= OregonH.FINAL_DISTANCE) {
       this.ui.notify('YOU AND YOUR FRIENDS REACHED BLUEBERRY HILL!<br> WE DID IT! <br> LO HICIMOS ', 'positive');
       this.gameActive = false;
       return;

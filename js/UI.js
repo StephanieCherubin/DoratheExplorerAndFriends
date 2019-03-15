@@ -4,19 +4,19 @@ var OregonH = OregonH || {};
 class UI {
   // show a notification in the message area
   notify(message, type) {
-    document.getElementById('updates-area').innerHTML = `<div class="update-${type}">Hour ${Math.ceil(this.caravan.hour)}: ${message}</div> ${document.getElementById('updates-area').innerHTML}`;
+    document.getElementById('updates-area').innerHTML = `<div class="update-${type}">Hour ${Math.ceil(this.redwagon.hour)}: ${message}</div> ${document.getElementById('updates-area').innerHTML}`;
   }
 
-// refresh visual caravan stats
+// refresh visual redwagon stats
   refreshStats() {
     // Destructure some objects for easy access
     const {
       hour, distance, friends, supplies, food, money, energy, weight, capacity,
-    } = this.caravan;
+    } = this.redwagon;
     const { ceil, floor } = Math;
 
     // modify the dom
-    document.getElementById('stat-hour').innerHTML = `${ceil(hour)}`; // Math.ceil(this.caravan.hour);
+    document.getElementById('stat-hour').innerHTML = `${ceil(hour)}`; // Math.ceil(this.redwagon.hour);
     document.getElementById('stat-distance').innerHTML = `${floor(distance)}`;
     document.getElementById('stat-friends').innerHTML = `${friends}`;
     document.getElementById('stat-supplies').innerHTML = `${supplies}`;
@@ -25,8 +25,8 @@ class UI {
     document.getElementById('stat-energy').innerHTML = `${energy}`;
     document.getElementById('stat-weight').innerHTML = `${ceil(weight)}/${capacity}`;
 
-    // update caravan position
-    document.getElementById('caravan').style.left = `${(380 * distance / OregonH.FINAL_DISTANCE)}px`;
+    // update redwagon position
+    document.getElementById('redwagon').style.left = `${(380 * distance / OregonH.FINAL_DISTANCE)}px`;
   }
 
   // show attack
@@ -57,22 +57,22 @@ class UI {
   confront() {
     const { energy, gold } = this;
 
-    if (energy > OregonH.Caravan.energy) {
+    if (energy > OregonH.redwagon.energy) {
       OregonH.UI.notify('Not enough energy to confront', 'negative');
       return false;
     }
   
     // damage can be 0 to 2 * energy
-    const damage = Math.ceil(Math.max(0, energy * 2 * Math.random() - this.caravan.energy));
+    const damage = Math.ceil(Math.max(0, energy * 2 * Math.random() - this.redwagon.energy));
   
     // check if Dora still has crew
-    if (damage < this.caravan.friends) {
-      this.caravan.friends -= damage;
-      this.caravan.money += gold;
+    if (damage < this.redwagon.friends) {
+      this.redwagon.friends -= damage;
+      this.redwagon.money += gold;
       this.notify(`${damage} friends ran away from him`, 'negative');
       this.notify(`Found $ ${gold}`, 'gold', 'positive');
     } else {
-      this.caravan.friends = 0;
+      this.redwagon.friends = 0;
       this.notify('Everybody left in the confrontation', 'negative');
     }
   
@@ -89,11 +89,11 @@ class UI {
     const damage = Math.ceil(Math.max(0, energy * Math.random() / 2));
   
     // check if Dora still has crew
-    if (damage < this.caravan.friends) {
-      this.caravan.friends -= damage;
+    if (damage < this.redwagon.friends) {
+      this.redwagon.friends -= damage;
       this.notify(`${damage} friends ran away`, 'negative');
     } else {
-      this.caravan.friends = 0;
+      this.redwagon.friends = 0;
       this.notify('Everybody decided not to finish the journey', 'negative');
     }
   
@@ -149,19 +149,19 @@ class UI {
   // buy product
   buyProduct(product) {
     // check we can afford it
-    if (product.price > OregonH.UI.caravan.money) {
+    if (product.price > OregonH.UI.redwagon.money) {
       OregonH.UI.notify('Not enough coins', 'negative');
       return false;
     }
 
-    OregonH.UI.caravan.money -= product.price;
+    OregonH.UI.redwagon.money -= product.price;
 
-    OregonH.UI.caravan[product.item] += +product.qty;
+    OregonH.UI.redwagon[product.item] += +product.qty;
 
     OregonH.UI.notify(`Picked up ${product.qty} ${product.item}`, 'positive');
 
     // update weight
-    OregonH.UI.caravan.updateWeight();
+    OregonH.UI.redwagon.updateWeight();
 
     // update visuals
     OregonH.UI.refreshStats();

@@ -43,8 +43,8 @@ class Event {
 
   stateChangeEvent(eventData) {
     // can't have negative quantities
-    if (eventData.value + this.caravan[eventData.stat] >= 0) {
-      this.caravan[eventData.stat] += eventData.value;
+    if (eventData.value + this.redwagon[eventData.stat] >= 0) {
+      this.redwagon[eventData.stat] += eventData.value;
       this.ui.notify(eventData.text + Math.abs(eventData.value), eventData.notification);
     }
   };
