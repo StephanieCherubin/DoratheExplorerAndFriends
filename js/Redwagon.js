@@ -1,7 +1,7 @@
 // redwagon.js
 
 // eslint-disable-next-line no-var
-var OregonH = OregonH || {};
+var OregonH = OregonH || { };
 
 // constants
 OregonH.WEIGHT_PER_OX = 20;
@@ -18,7 +18,7 @@ OregonH.EVENT_PROBABILITY = 0.15;
 OregonH.ENEMY_ENERGY_AVG = 5;
 OregonH.ENEMY_GOLD_AVG = 50;
 
-//-----------------redwagon Class----------------
+// -----------------redwagon Class----------------
 
 class Redwagon {
   constructor() {
@@ -30,12 +30,13 @@ class Redwagon {
       supplies: 2,
       money: 275,
       energy: 12,
-    }
-    
-    this.init(this.stats)
+    };
+    this.init(this.stats);
   }
-  
-  init({hour, distance, friends, food, supplies, money, energy}){
+
+  init({
+    hour, distance, friends, food, supplies, money, energy,
+  }) {
     this.hour = hour;
     this.distance = distance;
     this.friends = friends;
@@ -44,14 +45,15 @@ class Redwagon {
     this.money = money;
     this.energy = energy;
   }
-  
+
   // update weight and capacity
-  updateWeight () {
+  updateWeight() {
     let droppedFood = 0;
     let droppedSupplies = 0;
-    
+
     // how much can the redwagon carry
-    this.capacity = this.supplies * OregonH.WEIGHT_PER_OX + this.friends * OregonH.WEIGHT_PER_PERSON;
+    this.capacity = this.supplies * OregonH.WEIGHT_PER_OX
+    + this.friends * OregonH.WEIGHT_PER_PERSON;
 
     // how much weight do we currently have
     this.weight = this.food * OregonH.FOOD_WEIGHT + this.energy * OregonH.ENERGY_WEIGHT;
@@ -77,7 +79,7 @@ class Redwagon {
     if (droppedFood) {
       this.ui.notify(`Left ${droppedFood} food provisions behind`, 'negative');
     }
-};
+  }
 
   // update covered distance
   updateDistance() {
@@ -85,8 +87,8 @@ class Redwagon {
     const diff = this.capacity - this.weight;
     const speed = OregonH.SLOW_SPEED + diff / this.capacity * OregonH.FULL_SPEED;
     this.distance += speed;
-    }
-  
+  }
+
   // food consumption
 
   consumeFood() {
@@ -98,4 +100,4 @@ class Redwagon {
   }
 }
 
-OregonH.redwagon = new Redwagon()
+OregonH.redwagon = new Redwagon();

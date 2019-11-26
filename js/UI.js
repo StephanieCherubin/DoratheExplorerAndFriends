@@ -7,7 +7,7 @@ class UI {
     document.getElementById('updates-area').innerHTML = `<div class="update-${type}">Hour ${Math.ceil(this.redwagon.hour)}: ${message}</div> ${document.getElementById('updates-area').innerHTML}`;
   }
 
-// refresh visual redwagon stats
+  // refresh visual redwagon stats
   refreshStats() {
     // Destructure some objects for easy access
     const {
@@ -33,22 +33,22 @@ class UI {
   showAttack(energy, gold) {
     const attackDiv = document.getElementById('attack');
     attackDiv.classList.remove('hidden');
-  
+
     // keep properties
     this.energy = energy;
     this.gold = gold;
-  
+
     // show energy
     document.getElementById('attack-description').innerHTML = `Energy: ${energy}`;
-  
+
     // init once
     if (!this.attackInitiated) {
       // Stand up to villains
       document.getElementById('confront').addEventListener('click', this.confront.bind(this));
-  
+
       // run away
       document.getElementById('runaway').addEventListener('click', this.runaway.bind(this));
-  
+
       this.attackInitiated = true;
     }
   }
@@ -61,10 +61,10 @@ class UI {
       OregonH.UI.notify('Not enough energy to confront', 'negative');
       return false;
     }
-  
+
     // damage can be 0 to 2 * energy
     const damage = Math.ceil(Math.max(0, energy * 2 * Math.random() - this.redwagon.energy));
-  
+
     // check if Dora still has crew
     if (damage < this.redwagon.friends) {
       this.redwagon.friends -= damage;
@@ -75,7 +75,7 @@ class UI {
       this.redwagon.friends = 0;
       this.notify('Everybody left in the confrontation', 'negative');
     }
-  
+
     // resume journey
     document.getElementById('attack').classList.add('hidden');
     this.game.resumeJourney();
@@ -87,7 +87,7 @@ class UI {
 
     // damage can be 0 to energy / 2
     const damage = Math.ceil(Math.max(0, energy * Math.random() / 2));
-  
+
     // check if Dora still has crew
     if (damage < this.redwagon.friends) {
       this.redwagon.friends -= damage;
@@ -96,10 +96,10 @@ class UI {
       this.redwagon.friends = 0;
       this.notify('Everybody decided not to finish the journey', 'negative');
     }
-  
+
     // remove event listener
     // document.getElementById('runaway').removeEventListener('click', this.runaway);
-  
+
     // resume journey
     document.getElementById('attack').classList.add('hidden');
     this.game.resumeJourney();
@@ -169,4 +169,4 @@ class UI {
   }
 }
 
-OregonH.UI = new UI
+OregonH.UI = new UI();

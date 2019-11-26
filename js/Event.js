@@ -6,15 +6,14 @@ var OregonH = OregonH || {};
 class Event {
   randomInts(n) {
     const { floor, random } = Math;
-    return floor (random() * n)
+    return floor(random() * n)
   }
 
   generateEvent() {
     // pick random one
-    const eventIndex = this.randomInts
-   (this.eventTypes.length);
+    const eventIndex = this.randomInts(this.eventTypes.length);
     const eventData = this.eventTypes[eventIndex];
-  
+
     // events that consist in updating a stat
     if (eventData.type === 'STAT-CHANGE') {
       this.stateChangeEvent(eventData);
@@ -22,24 +21,24 @@ class Event {
       // shops
       // pause game
       this.game.pauseJourney();
-  
+
       // notify user
       this.ui.notify(eventData.text, eventData.notification);
-  
+
       // prepare event
       this.shopEvent(eventData);
     } else if (eventData.type === 'ATTACK') {
       // attacks
       // pause game
       this.game.pauseJourney();
-  
+
       // notify user
       this.ui.notify(eventData.text, eventData.notification);
-  
+
       // prepare event
       this.attackEvent(eventData);
     }
-  };
+  }
 
   stateChangeEvent(eventData) {
     // can't have negative quantities
@@ -47,7 +46,7 @@ class Event {
       this.redwagon[eventData.stat] += eventData.value;
       this.ui.notify(eventData.text + Math.abs(eventData.value), eventData.notification);
     }
-  };
+  }
 
   randomCeil(n) {
     const { ceil, random } = Math;
@@ -57,39 +56,39 @@ class Event {
   shopEvent(eventData) {
     // number of products for sale
     const numProds = this.randomCeil(4);
-  
+
     // product list
     const products = [];
     let j;
     let priceFactor;
-  
+
     for (let i = 0; i < numProds; i += 1) {
       // random product
       j = Math.floor(Math.random() * eventData.products.length);
-  
+
       // multiply price by random factor +-30%
       priceFactor = 0.7 + 0.6 * Math.random();
-  
+
       products.push({
         item: eventData.products[j].item,
         qty: eventData.products[j].qty,
         price: Math.round(eventData.products[j].price * priceFactor),
       });
     }
-  
+
     this.ui.showShop(products);
-  };
+  }
 
   // prepare an attack event
   attackEvent() {
     const energy = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_ENERGY_AVG);
     const gold = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_GOLD_AVG);
-  
+
     this.ui.showAttack(energy, gold);
-  };
+  }
 }
 
-OregonH.Event = new Event() 
+OregonH.Event = new Event();
 
 OregonH.Event.eventTypes = [
   // Make a class for every type of event type below
@@ -204,4 +203,3 @@ OregonH.Event.eventTypes = [
     value: -2,
   },
 ];
-
