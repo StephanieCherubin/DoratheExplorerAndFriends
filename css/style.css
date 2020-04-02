@@ -1,4 +1,4 @@
-html {
+html, body{
   height: 100%;
 }
 
@@ -6,7 +6,6 @@ body {
   padding: 0;
   margin: 0;
   border: 0;
-  height: 100%;
   overflow: hidden;
   font-family: 'Nanum Pen Script', cursive;
   font-size: 20px;
@@ -17,6 +16,7 @@ body {
 
 h1, h3 {
  text-align: center;
+ margin: 0;
 }
 
 .hidden {
